@@ -27,7 +27,9 @@ class NoteFragment : BottomSheetDialogFragment() {
 
         // init views
         binding.apply {
-
+            closeImg.setOnClickListener {
+                this@NoteFragment.dismiss()
+            }
         }
     }
 
