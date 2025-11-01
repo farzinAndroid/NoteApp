@@ -54,6 +54,7 @@ dependencies {
     implementation (libs.androidx.room.runtime)
     implementation (libs.androidx.room.ktx)
     ksp (libs.androidx.room.compiler)
+    implementation(libs.androidx.room.rxjava3)
 
     //Nav
     implementation(libs.androidx.navigation.fragment.ktx.v295)
