@@ -9,6 +9,7 @@ import android.widget.ArrayAdapter
 import com.farzin.noteappmvp.data.models.NoteEntity
 import com.farzin.noteappmvp.data.repository.add.AddRepository
 import com.farzin.noteappmvp.databinding.FragmentNoteBinding
+import com.farzin.noteappmvp.utils.Constants
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
@@ -76,7 +77,7 @@ class AddNoteFragment : BottomSheetDialogFragment() , AddNoteContracts.View {
 
 
     private fun createCategoriesSpinner(){
-        categoriesList = arrayOf("Home","Health","Education","Work")
+        categoriesList = arrayOf(Constants.HEALTH,Constants.HOME,Constants.WORK,Constants.EDUCATION)
         val adapter =ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,categoriesList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.categoriesSpinner.adapter = adapter
@@ -92,7 +93,7 @@ class AddNoteFragment : BottomSheetDialogFragment() , AddNoteContracts.View {
     }
 
     private fun createPrioritySpinner(){
-        priorityList = arrayOf("High","Medium","Low")
+        priorityList = arrayOf(Constants.HIGH,Constants.MEDIUM,Constants.LOW)
         val adapter =ArrayAdapter(requireContext(),android.R.layout.simple_spinner_item,priorityList)
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.prioritySpinner.adapter = adapter

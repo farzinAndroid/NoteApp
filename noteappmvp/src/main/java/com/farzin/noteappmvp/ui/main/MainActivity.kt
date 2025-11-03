@@ -4,6 +4,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.appcompat.app.AppCompatActivity
+import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.farzin.noteappmvp.data.models.NoteEntity
 import com.farzin.noteappmvp.data.repository.main.MainRepository
 import com.farzin.noteappmvp.databinding.ActivityMainBinding
@@ -24,6 +25,9 @@ class MainActivity : AppCompatActivity() , MainContracts.View {
 
     private val mainPresenter by lazy { MainPresenter(repository,this) }
 
+    @Inject
+    lateinit var notesAdapter: NotesListAdapter
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -40,6 +44,10 @@ class MainActivity : AppCompatActivity() , MainContracts.View {
 
             //load all notes
             mainPresenter.getAllNotes()
+
+            /*notesAdapter.setOnClickListener { noteEntity->
+                Toast.makeText(this@MainActivity, noteEntity.title, Toast.LENGTH_SHORT).show()
+            }*/
         }
     }
 
@@ -47,7 +55,13 @@ class MainActivity : AppCompatActivity() , MainContracts.View {
         binding.emptySectionLayout.visibility = View.GONE
         binding.noteListRv.visibility = View.VISIBLE
 
-        Toast.makeText(this, notesList.size.toString(), Toast.LENGTH_SHORT).show()
+        notesAdapter.setData(notesList)
+
+
+        binding.noteListRv.apply {
+            layoutManager = StaggeredGridLayoutManager(2,StaggeredGridLayoutManager.VERTICAL)
+            adapter = notesAdapter
+        }
     }
 
     override fun showEmptyList() {
