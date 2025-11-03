@@ -7,7 +7,7 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import com.farzin.noteappmvp.data.models.NoteEntity
-import com.farzin.noteappmvp.data.repository.AddRepository
+import com.farzin.noteappmvp.data.repository.add.AddRepository
 import com.farzin.noteappmvp.databinding.FragmentNoteBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint

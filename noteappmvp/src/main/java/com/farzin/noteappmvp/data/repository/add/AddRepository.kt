@@ -1,4 +1,4 @@
-package com.farzin.noteappmvp.data.repository
+package com.farzin.noteappmvp.data.repository.add
 
 import com.farzin.noteappmvp.data.database.NoteDao
 import com.farzin.noteappmvp.data.models.NoteEntity
