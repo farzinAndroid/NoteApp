@@ -1,13 +1,9 @@
 package com.farzin.noteappmvp.ui.main
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.farzin.noteappmvp.R
 import com.farzin.noteappmvp.databinding.ActivityMainBinding
-import com.farzin.noteappmvp.ui.add.NoteFragment
+import com.farzin.noteappmvp.ui.add.AddNoteFragment
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
@@ -24,7 +20,7 @@ class MainActivity : AppCompatActivity() {
         binding.apply {
             //noteDetail
             addNoteBtn.setOnClickListener {
-                NoteFragment().show(supportFragmentManager,NoteFragment().tag)
+                AddNoteFragment().show(supportFragmentManager,AddNoteFragment().tag)
             }
         }
     }

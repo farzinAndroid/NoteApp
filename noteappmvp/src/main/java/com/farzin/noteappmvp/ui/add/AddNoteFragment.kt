@@ -1,17 +1,15 @@
 package com.farzin.noteappmvp.ui.add
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
-import com.farzin.noteappmvp.R
 import com.farzin.noteappmvp.databinding.FragmentNoteBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 
-class NoteFragment : BottomSheetDialogFragment() {
+class AddNoteFragment : BottomSheetDialogFragment() {
 
     private lateinit var binding: FragmentNoteBinding
 
@@ -37,7 +35,7 @@ class NoteFragment : BottomSheetDialogFragment() {
         binding.apply {
             //close
             closeImg.setOnClickListener {
-                this@NoteFragment.dismiss()
+                this@AddNoteFragment.dismiss()
             }
 
             // init spinners
