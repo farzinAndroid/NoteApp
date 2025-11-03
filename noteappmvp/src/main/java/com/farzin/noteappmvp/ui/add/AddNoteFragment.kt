@@ -6,12 +6,26 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.AdapterView
 import android.widget.ArrayAdapter
+import com.farzin.noteappmvp.data.models.NoteEntity
+import com.farzin.noteappmvp.data.repository.AddRepository
 import com.farzin.noteappmvp.databinding.FragmentNoteBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
+import dagger.hilt.android.AndroidEntryPoint
+import javax.inject.Inject
 
-class AddNoteFragment : BottomSheetDialogFragment() {
+@AndroidEntryPoint
+class AddNoteFragment : BottomSheetDialogFragment() , AddNoteContracts.View {
 
     private lateinit var binding: FragmentNoteBinding
+
+    @Inject
+    lateinit var noteEntity: NoteEntity
+
+    @Inject
+    lateinit var repository: AddRepository
+
+    private val addNotePresenter by lazy { AddNotePresenter(repository,this) }
+
 
     //Other
     private lateinit var categoriesList : Array<String>
@@ -41,6 +55,22 @@ class AddNoteFragment : BottomSheetDialogFragment() {
             // init spinners
             createCategoriesSpinner()
             createPrioritySpinner()
+
+
+            //Save
+            saveNoteBtn.setOnClickListener {
+                val title = titleEdt.text.toString()
+                val desc = descEdt.text.toString()
+                //entity
+                noteEntity.id = 0
+                noteEntity.title = title
+                noteEntity.desc = desc
+                noteEntity.priority = priority
+                noteEntity.category = category
+                //save
+                addNotePresenter.saveNote(noteEntity)
+
+            }
         }
     }
 
@@ -75,6 +105,15 @@ class AddNoteFragment : BottomSheetDialogFragment() {
             }
 
         }
+    }
+
+    override fun closeBottomSheetFragment() {
+        this.dismiss()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        addNotePresenter.onStop()
     }
 
 }
