@@ -1,10 +1,11 @@
 package com.farzin.noteappmvp.ui.main
 
 import android.os.Bundle
+import android.view.Menu
 import android.view.View
-import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.farzin.noteappmvp.R
 import com.farzin.noteappmvp.data.models.NoteEntity
@@ -45,6 +46,10 @@ class MainActivity : AppCompatActivity() , MainContracts.View {
         setContentView(binding.root)
 
         binding.apply {
+
+            // set actionView (set Toolbar)
+            setSupportActionBar(notesToolbar)
+
             //noteDetail
             addNoteBtn.setOnClickListener {
                 NoteFragment().show(supportFragmentManager,NoteFragment().tag)
@@ -111,7 +116,7 @@ class MainActivity : AppCompatActivity() , MainContracts.View {
     }
 
     override fun showDeleteMessage() {
-        Snackbar.make(binding.root,"item deleted",Snackbar.LENGTH_SHORT).show()
+        Snackbar.make(binding.root,this.getString(R.string.delete_msg),Snackbar.LENGTH_SHORT).show()
     }
 
     private fun showPriorityAlertDialogue(){
@@ -131,6 +136,28 @@ class MainActivity : AppCompatActivity() , MainContracts.View {
 
         val dialog = builder.create()
         dialog.show()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu): Boolean {
+        menuInflater.inflate(R.menu.menu_toolbar,menu)
+
+        val search = menu.findItem(R.id.search)
+
+        val searchView = search.actionView as androidx.appcompat.widget.SearchView
+        searchView.queryHint = this@MainActivity.getString(R.string.search)
+        searchView.setOnQueryTextListener(object : SearchView.OnQueryTextListener{
+            override fun onQueryTextSubmit(query: String): Boolean {
+                return false
+            }
+
+            override fun onQueryTextChange(newText: String): Boolean {
+                mainPresenter.searchNotes(newText)
+                return true
+            }
+
+        })
+
+        return super.onCreateOptionsMenu(menu)
     }
 
     override fun onStop() {

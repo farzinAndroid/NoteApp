@@ -8,6 +8,7 @@
     <string name="desc">Description</string>
     <string name="categories">Categories</string>
     <string name="priority">Priority</string>
+    <string name="delete_msg">Item deleted</string>
     <string name="save">Save</string>
     <string name="edit">Edit</string>
     <string name="delete">Delete</string>

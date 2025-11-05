@@ -9,5 +9,6 @@ class MainRepository @Inject constructor(private val dao:NoteDao) {
     fun getAllNotes() = dao.getAllNotes()
     fun deleteNote(noteEntity: NoteEntity) = dao.deleteNote(noteEntity)
     fun getFilteredNotes(priority: String) = dao.getFilteredNotes(priority)
+    fun searchNote(search:String) = dao.searchNote(search)
 
 }
