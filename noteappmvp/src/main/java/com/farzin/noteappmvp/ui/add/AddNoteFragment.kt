@@ -25,7 +25,10 @@ class AddNoteFragment : BottomSheetDialogFragment() , AddNoteContracts.View {
     @Inject
     lateinit var repository: AddRepository
 
-    private val addNotePresenter by lazy { AddNotePresenter(repository,this) }
+    @Inject
+    lateinit var addNotePresenter: AddNotePresenter
+
+//    private val addNotePresenter by lazy { AddNotePresenter(repository,this) }
 
 
     //Other

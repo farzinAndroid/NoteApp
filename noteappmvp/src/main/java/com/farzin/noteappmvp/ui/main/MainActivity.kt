@@ -23,7 +23,10 @@ class MainActivity : AppCompatActivity() , MainContracts.View {
     @Inject
     lateinit var repository: MainRepository
 
-    private val mainPresenter by lazy { MainPresenter(repository,this) }
+    @Inject
+    lateinit var mainPresenter: MainPresenter
+
+//    private val mainPresenter by lazy { MainPresenter(repository,this) }
 
     @Inject
     lateinit var notesAdapter: NotesListAdapter
