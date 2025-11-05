@@ -1,5 +1,6 @@
 package com.farzin.noteappmvp.data.database
 
+import android.renderscript.RenderScript.Priority
 import androidx.room.Dao
 import androidx.room.Delete
 import androidx.room.Insert
@@ -27,5 +28,8 @@ interface NoteDao {
 
     @Query("select * from note_table where id == :id")
     fun getNote(id:Int) : Observable<NoteEntity>
+
+    @Query("select * from note_table where priority == :priority")
+    fun getFilteredNotes(priority: String) : Observable<List<NoteEntity>>
 
 }

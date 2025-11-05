@@ -35,5 +35,14 @@ class MainPresenter @Inject constructor(
             }
     }
 
+    override fun getFilteredNotes(priority: String) {
+        disposable = repository.getFilteredNotes(priority)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                view.showAllNotes(it)
+            }
+    }
+
 
 }

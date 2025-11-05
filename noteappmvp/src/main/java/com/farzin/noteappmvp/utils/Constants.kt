@@ -8,6 +8,7 @@ object Constants {
     const val HIGH = "High"
     const val MEDIUM = "Medium"
     const val LOW = "Low"
+    const val ALL = "All"
 
     const val HEALTH = "Health"
     const val HOME = "Home"
