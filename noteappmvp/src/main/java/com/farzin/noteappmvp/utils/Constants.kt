@@ -14,6 +14,11 @@ object Constants {
     const val WORK = "Work"
     const val EDUCATION = "Education"
 
+    const val DELETE = "Delete"
+    const val EDIT = "edit"
+
+    const val BUNDLE_ID = "bundle_id"
+
 
 
 }

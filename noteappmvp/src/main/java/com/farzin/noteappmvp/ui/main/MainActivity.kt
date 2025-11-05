@@ -8,7 +8,9 @@ import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.farzin.noteappmvp.data.models.NoteEntity
 import com.farzin.noteappmvp.data.repository.main.MainRepository
 import com.farzin.noteappmvp.databinding.ActivityMainBinding
-import com.farzin.noteappmvp.ui.add.AddNoteFragment
+import com.farzin.noteappmvp.ui.add.NoteFragment
+import com.farzin.noteappmvp.utils.Constants
+import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
@@ -41,7 +43,7 @@ class MainActivity : AppCompatActivity() , MainContracts.View {
         binding.apply {
             //noteDetail
             addNoteBtn.setOnClickListener {
-                AddNoteFragment().show(supportFragmentManager,AddNoteFragment().tag)
+                NoteFragment().show(supportFragmentManager,NoteFragment().tag)
             }
 
 
@@ -51,6 +53,26 @@ class MainActivity : AppCompatActivity() , MainContracts.View {
             /*notesAdapter.setOnClickListener { noteEntity->
                 Toast.makeText(this@MainActivity, noteEntity.title, Toast.LENGTH_SHORT).show()
             }*/
+
+
+            notesAdapter.setOnClickListener { noteEntity, state ->
+                when(state){
+                    Constants.DELETE->{
+                        mainPresenter.deleteNote(noteEntity)
+                    }
+                    Constants.EDIT->{
+                        val bundle = Bundle()
+                        bundle.putInt(Constants.BUNDLE_ID,noteEntity.id)
+                        val noteFragment = NoteFragment()
+                        noteFragment.arguments = bundle
+                        noteFragment.show(supportFragmentManager,NoteFragment().tag)
+                    }
+                }
+            }
+
+
+
+
         }
     }
 
@@ -70,5 +92,14 @@ class MainActivity : AppCompatActivity() , MainContracts.View {
     override fun showEmptyList() {
         binding.emptySectionLayout.visibility = View.VISIBLE
         binding.noteListRv.visibility = View.GONE
+    }
+
+    override fun showDeleteMessage() {
+        Snackbar.make(binding.root,"item deleted",Snackbar.LENGTH_SHORT).show()
+    }
+
+    override fun onStop() {
+        super.onStop()
+        mainPresenter.onStop()
     }
 }

@@ -1,6 +1,7 @@
 package com.farzin.noteappmvp.ui.main
 
 import com.farzin.noteappmvp.base.BasePresenterImpl
+import com.farzin.noteappmvp.data.models.NoteEntity
 import com.farzin.noteappmvp.data.repository.main.MainRepository
 import io.reactivex.rxjava3.android.schedulers.AndroidSchedulers
 import io.reactivex.rxjava3.schedulers.Schedulers
@@ -22,6 +23,15 @@ class MainPresenter @Inject constructor(
                 } else {
                     view.showEmptyList()
                 }
+            }
+    }
+
+    override fun deleteNote(noteEntity: NoteEntity) {
+        disposable = repository.deleteNote(noteEntity)
+            .subscribeOn(Schedulers.io())
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe {
+                view.showDeleteMessage()
             }
     }
 

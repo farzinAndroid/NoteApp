@@ -3,6 +3,7 @@ package com.farzin.noteappmvp.ui.main
 import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
@@ -74,14 +75,37 @@ class NotesListAdapter @Inject constructor() : RecyclerView.Adapter<NotesListAda
                     }
 
                 }
+
+
+                menuImg.setOnClickListener {
+                    val popUpMenu = PopupMenu(context,it)
+                    popUpMenu.inflate(R.menu.menu_item)
+                    popUpMenu.show()
+
+                    //click
+                    popUpMenu.setOnMenuItemClickListener {menuItem->
+
+                        when(menuItem.itemId){
+                            R.id.item_delete->{
+                                onItemClickListener?.let { it1 -> it1(item,Constants.DELETE) }
+                            }
+                            R.id.item_edit->{
+                                onItemClickListener?.let { it1 -> it1(item,Constants.EDIT) }
+                            }
+                        }
+
+                        return@setOnMenuItemClickListener true
+                    }
+                }
+
             }
         }
     }
 
 
-    private var onItemClickListener : ((NoteEntity) ->  Unit)? = null
+    private var onItemClickListener : ((NoteEntity,String) ->  Unit)? = null
 
-    fun setOnClickListener(listener:((NoteEntity) ->  Unit)) {
+    fun setOnClickListener(listener:((NoteEntity,String) ->  Unit)) {
         onItemClickListener = listener
     }
 
