@@ -6,8 +6,7 @@ import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
-import coil.load
-import com.farzin.noteappmvp.R
+import com.example.ui.R
 import com.farzin.noteappmvp.data.models.NoteEntity
 import com.farzin.noteappmvp.databinding.NoteItemBinding
 import com.farzin.noteappmvp.utils.Constants
@@ -62,16 +61,16 @@ class NotesListAdapter @Inject constructor() : RecyclerView.Adapter<NotesListAda
 
                 when(item.category){
                     Constants.HEALTH->{
-                        categoryImg.setImageResource(R.drawable.healthcare)
+                        categoryImg.setImageResource(com.example.ui.R.drawable.healthcare)
                     }
                     Constants.HOME->{
-                        categoryImg.setImageResource(R.drawable.home)
+                        categoryImg.setImageResource(com.example.ui.R.drawable.home)
                     }
                     Constants.WORK->{
-                        categoryImg.setImageResource(R.drawable.work)
+                        categoryImg.setImageResource(com.example.ui.R.drawable.work)
                     }
                     Constants.EDUCATION->{
-                        categoryImg.setImageResource(R.drawable.education)
+                        categoryImg.setImageResource(com.example.ui.R.drawable.education)
                     }
 
                 }
@@ -79,17 +78,17 @@ class NotesListAdapter @Inject constructor() : RecyclerView.Adapter<NotesListAda
 
                 menuImg.setOnClickListener {
                     val popUpMenu = PopupMenu(context,it)
-                    popUpMenu.inflate(R.menu.menu_item)
+                    popUpMenu.inflate(com.farzin.noteappmvp.R.menu.menu_item)
                     popUpMenu.show()
 
                     //click
                     popUpMenu.setOnMenuItemClickListener {menuItem->
 
                         when(menuItem.itemId){
-                            R.id.item_delete->{
+                            com.farzin.noteappmvp.R.id.item_delete->{
                                 onItemClickListener?.let { it1 -> it1(item,Constants.DELETE) }
                             }
-                            R.id.item_edit->{
+                            com.farzin.noteappmvp.R.id.item_edit->{
                                 onItemClickListener?.let { it1 -> it1(item,Constants.EDIT) }
                             }
                         }

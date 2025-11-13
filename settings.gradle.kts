@@ -22,3 +22,5 @@ dependencyResolutionManagement {
 rootProject.name = "NoteApp"
 include(":app")
 include(":noteappmvp")
+include(":foodappmvp")
+include(":ui")
