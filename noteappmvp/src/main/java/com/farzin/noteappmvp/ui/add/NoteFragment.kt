@@ -7,9 +7,9 @@ import android.view.ViewGroup
 import android.widget.AdapterView
 import com.example.local.Constants
 import android.widget.ArrayAdapter
+import com.example.ui.databinding.FragmentNoteBinding
 import com.farzin.noteappmvp.data.models.NoteEntity
 import com.farzin.noteappmvp.data.repository.note.NoteRepository
-import com.farzin.noteappmvp.databinding.FragmentNoteBinding
 import com.google.android.material.bottomsheet.BottomSheetDialogFragment
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

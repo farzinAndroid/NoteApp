@@ -4,12 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
-import com.example.local.Constants
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.local.Constants
 import com.example.ui.R
+import com.example.ui.databinding.NoteItemBinding
 import com.farzin.noteappmvp.data.models.NoteEntity
-import com.farzin.noteappmvp.databinding.NoteItemBinding
 import javax.inject.Inject
 
 class NotesListAdapter @Inject constructor() : RecyclerView.Adapter<NotesListAdapter.MyViewHolder>()  {
@@ -78,17 +78,17 @@ class NotesListAdapter @Inject constructor() : RecyclerView.Adapter<NotesListAda
 
                 menuImg.setOnClickListener {
                     val popUpMenu = PopupMenu(context,it)
-                    popUpMenu.inflate(com.farzin.noteappmvp.R.menu.menu_item)
+                    popUpMenu.inflate(R.menu.menu_item)
                     popUpMenu.show()
 
                     //click
                     popUpMenu.setOnMenuItemClickListener {menuItem->
 
                         when(menuItem.itemId){
-                            com.farzin.noteappmvp.R.id.item_delete->{
+                            R.id.item_delete->{
                                 onItemClickListener?.let { it1 -> it1(item,Constants.DELETE) }
                             }
-                            com.farzin.noteappmvp.R.id.item_edit->{
+                            R.id.item_edit->{
                                 onItemClickListener?.let { it1 -> it1(item,Constants.EDIT) }
                             }
                         }

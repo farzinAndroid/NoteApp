@@ -7,11 +7,11 @@ import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
-import com.example.ui.R
 import com.example.local.Constants
+import com.example.ui.R
+import com.example.ui.databinding.ActivityMainBinding
 import com.farzin.noteappmvp.data.models.NoteEntity
 import com.farzin.noteappmvp.data.repository.main.MainRepository
-import com.farzin.noteappmvp.databinding.ActivityMainBinding
 import com.farzin.noteappmvp.ui.add.NoteFragment
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
@@ -20,7 +20,7 @@ import javax.inject.Inject
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() , MainContracts.View {
 
-    private lateinit var binding:ActivityMainBinding
+    private lateinit var binding: ActivityMainBinding
 
 
     //other
@@ -83,7 +83,7 @@ class MainActivity : AppCompatActivity() , MainContracts.View {
             //filter
             notesToolbar.setOnMenuItemClickListener {menuItem->
                 when(menuItem.itemId){
-                    com.farzin.noteappmvp.R.id.filter->{
+                    R.id.filter->{
                         showPriorityAlertDialogue()
                         return@setOnMenuItemClickListener true
                     }
@@ -139,9 +139,9 @@ class MainActivity : AppCompatActivity() , MainContracts.View {
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
-        menuInflater.inflate(com.farzin.noteappmvp.R.menu.menu_toolbar,menu)
+        menuInflater.inflate(R.menu.menu_toolbar,menu)
 
-        val search = menu.findItem(com.farzin.noteappmvp.R.id.search)
+        val search = menu.findItem(R.id.search)
 
         val searchView = search.actionView as androidx.appcompat.widget.SearchView
         searchView.queryHint = this@MainActivity.getString(R.string.search)
