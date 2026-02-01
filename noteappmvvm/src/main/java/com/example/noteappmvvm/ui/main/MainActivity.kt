@@ -1,29 +1,44 @@
 package com.example.noteappmvvm.ui.main
 
 import android.os.Bundle
-import androidx.activity.enableEdgeToEdge
+import androidx.activity.viewModels
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.ViewCompat
-import androidx.core.view.WindowInsetsCompat
-import com.example.noteappmvvm.R
+import androidx.lifecycle.lifecycleScope
+import com.example.noteappmvvm.ui.main.note.NoteFragment
+import com.example.noteappmvvm.viewmodel.NoteViewmodel
 import com.example.ui.databinding.ActivityMainBinding
 import dagger.hilt.android.AndroidEntryPoint
 
 @AndroidEntryPoint
 class MainActivity : AppCompatActivity() {
 
-    private lateinit var binding: ActivityMainBinding
+    private var _binding: ActivityMainBinding? = null
+    private val binding get() = _binding
+
+
+    //viewmodel
+    private val viewModel by viewModels<NoteViewmodel>()
+
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
 //        enableEdgeToEdge()
-        binding = ActivityMainBinding.inflate(layoutInflater)
-        setContentView(binding.root)
+        _binding = ActivityMainBinding.inflate(layoutInflater)
+        setContentView(binding?.root)
 
-        binding.apply {
+        binding?.apply {
+            addNoteBtn.setOnClickListener {
+                NoteFragment().show(supportFragmentManager, NoteFragment().tag)
+            }
+
 
         }
 
 
+    }
+
+    override fun onDestroy() {
+        super.onDestroy()
+        _binding = null
     }
 }
