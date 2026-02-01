@@ -2,7 +2,7 @@ package com.farzin.noteappmvp.data.models
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.farzin.noteappmvp.utils.Constants
+import com.example.local.Constants
 
 @Entity(tableName = Constants.TABLE_NAME)
 data class NoteEntity(

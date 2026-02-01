@@ -4,12 +4,12 @@ import android.content.Context
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.appcompat.widget.PopupMenu
+import com.example.local.Constants
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ui.R
 import com.farzin.noteappmvp.data.models.NoteEntity
 import com.farzin.noteappmvp.databinding.NoteItemBinding
-import com.farzin.noteappmvp.utils.Constants
 import javax.inject.Inject
 
 class NotesListAdapter @Inject constructor() : RecyclerView.Adapter<NotesListAdapter.MyViewHolder>()  {

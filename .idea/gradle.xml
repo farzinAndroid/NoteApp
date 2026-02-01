@@ -11,7 +11,9 @@
           <set>
             <option value="$PROJECT_DIR$" />
             <option value="$PROJECT_DIR$/app" />
+            <option value="$PROJECT_DIR$/local" />
             <option value="$PROJECT_DIR$/noteappmvp" />
+            <option value="$PROJECT_DIR$/noteappmvvm" />
             <option value="$PROJECT_DIR$/ui" />
           </set>
         </option>

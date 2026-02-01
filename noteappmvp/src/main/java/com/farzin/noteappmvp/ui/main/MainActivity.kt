@@ -8,11 +8,11 @@ import androidx.appcompat.app.AppCompatActivity
 import androidx.appcompat.widget.SearchView
 import androidx.recyclerview.widget.StaggeredGridLayoutManager
 import com.example.ui.R
+import com.example.local.Constants
 import com.farzin.noteappmvp.data.models.NoteEntity
 import com.farzin.noteappmvp.data.repository.main.MainRepository
 import com.farzin.noteappmvp.databinding.ActivityMainBinding
 import com.farzin.noteappmvp.ui.add.NoteFragment
-import com.farzin.noteappmvp.utils.Constants
 import com.google.android.material.snackbar.Snackbar
 import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject

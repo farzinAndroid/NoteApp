@@ -1,4 +1,4 @@
-package com.farzin.noteappmvp.utils
+package com.example.local
 
 object Constants {
 
