@@ -7,11 +7,11 @@ plugins {
 }
 
 android {
-    namespace = "com.farzin.noteappmvp"
+    namespace = "com.example.noteappmvvm"
     compileSdk = 36
 
     defaultConfig {
-        minSdk = 26
+        minSdk = 24
 
         testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
@@ -32,14 +32,9 @@ android {
     kotlinOptions {
         jvmTarget = "11"
     }
-
-    buildFeatures {
-        viewBinding = true
-    }
 }
 
 dependencies {
-
     implementation(libs.androidx.core.ktx)
     implementation(libs.androidx.appcompat)
     implementation(libs.material)
@@ -48,6 +43,11 @@ dependencies {
     testImplementation(libs.junit)
     androidTestImplementation(libs.androidx.junit)
     androidTestImplementation(libs.androidx.espresso.core)
+
+
+    implementation(project(":ui"))
+    implementation(project(":local"))
+
 
     //hilt di
     implementation (libs.hilt.android)
@@ -64,30 +64,8 @@ dependencies {
     implementation(libs.androidx.navigation.fragment.ktx.v295)
     implementation(libs.androidx.navigation.ui.ktx.v295)
 
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.10.0")
 
-    //retrofit
-    implementation (libs.retrofit)
-    implementation (libs.converter.gson)
-    implementation(libs.logging.interceptor)
-    implementation(libs.okhttp)
-    implementation(libs.gson)
-
-    //coil
-    implementation(libs.coil)
-
-    //rxjava for retrofit
-    implementation(libs.adapter.rxjava3)
-
-
-    //Rx java
-    implementation (libs.rxandroid)
-    // Because RxAndroid releases are few and far between, it is recommended you also
-    // explicitly depend on RxJava's latest version for bug fixes and new features.
-    // (see https://github.com/ReactiveX/RxJava/releases for latest 3.x.x version)
-    implementation (libs.rxjava)
-    implementation(libs.rxjava3.extensions)
-    implementation (libs.rxbinding)
-
-    implementation(project(":ui"))
-    implementation(project(":local"))
 }

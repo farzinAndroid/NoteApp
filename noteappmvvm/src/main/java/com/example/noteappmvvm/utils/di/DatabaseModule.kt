@@ -1,10 +1,10 @@
-package com.farzin.noteappmvp.utils.di
+package com.example.noteappmvvm.utils.di
 
 import android.content.Context
 import androidx.room.Room
 import com.example.local.Constants
-import com.farzin.noteappmvp.data.database.NoteDatabase
-import com.farzin.noteappmvp.data.models.NoteEntity
+import com.example.noteappmvvm.data.database.NoteDatabase
+import com.example.noteappmvvm.data.model.NoteEntity
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn

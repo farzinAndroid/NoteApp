@@ -23,3 +23,5 @@ rootProject.name = "NoteApp"
 include(":app")
 include(":noteappmvp")
 include(":ui")
+include(":noteappmvvm")
+include(":local")

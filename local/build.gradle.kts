@@ -4,7 +4,7 @@ plugins {
 }
 
 android {
-    namespace = "com.example.ui"
+    namespace = "com.example.local"
     compileSdk = 36
 
     defaultConfig {
@@ -29,10 +29,6 @@ android {
     }
     kotlinOptions {
         jvmTarget = "11"
-    }
-
-    buildFeatures {
-        viewBinding = true
     }
 }
 

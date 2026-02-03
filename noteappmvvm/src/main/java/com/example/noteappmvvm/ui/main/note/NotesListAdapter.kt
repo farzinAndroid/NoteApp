@@ -1,4 +1,4 @@
-package com.farzin.noteappmvp.ui.main
+package com.example.noteappmvvm.ui.main.note
 
 import android.content.Context
 import android.view.LayoutInflater
@@ -7,9 +7,9 @@ import androidx.appcompat.widget.PopupMenu
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.RecyclerView
 import com.example.local.Constants
+import com.example.noteappmvvm.data.model.NoteEntity
 import com.example.ui.R
 import com.example.ui.databinding.NoteItemBinding
-import com.farzin.noteappmvp.data.models.NoteEntity
 import javax.inject.Inject
 
 class NotesListAdapter @Inject constructor() : RecyclerView.Adapter<NotesListAdapter.MyViewHolder>()  {
@@ -61,16 +61,16 @@ class NotesListAdapter @Inject constructor() : RecyclerView.Adapter<NotesListAda
 
                 when(item.category){
                     Constants.HEALTH->{
-                        categoryImg.setImageResource(com.example.ui.R.drawable.healthcare)
+                        categoryImg.setImageResource(R.drawable.healthcare)
                     }
                     Constants.HOME->{
-                        categoryImg.setImageResource(com.example.ui.R.drawable.home)
+                        categoryImg.setImageResource(R.drawable.home)
                     }
                     Constants.WORK->{
-                        categoryImg.setImageResource(com.example.ui.R.drawable.work)
+                        categoryImg.setImageResource(R.drawable.work)
                     }
                     Constants.EDUCATION->{
-                        categoryImg.setImageResource(com.example.ui.R.drawable.education)
+                        categoryImg.setImageResource(R.drawable.education)
                     }
 
                 }
