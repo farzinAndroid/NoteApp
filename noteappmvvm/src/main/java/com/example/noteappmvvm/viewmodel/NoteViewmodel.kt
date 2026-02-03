@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import com.example.local.Constants
 import com.example.noteappmvvm.data.model.NoteEntity
 import com.example.noteappmvvm.data.repository.NoteRepository
+import com.example.noteappmvvm.utils.DataStatus
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
@@ -17,6 +18,7 @@ class NoteViewmodel @Inject constructor(
     private val repository: NoteRepository
 ) : ViewModel() {
 
+    val note = MutableLiveData<DataStatus<NoteEntity>>()
 
     //Notes
     fun saveUpdateNote(noteEntity: NoteEntity,isSave: Boolean) = viewModelScope.launch(Dispatchers.IO) {
@@ -27,6 +29,11 @@ class NoteViewmodel @Inject constructor(
         }
     }
 
+    fun getNote(noteId: Int) = viewModelScope.launch(Dispatchers.IO) {
+        repository.getNote(noteId).collect {
+            note.postValue(DataStatus.success(it,false))
+        }
+    }
 
 
 
@@ -59,7 +66,6 @@ class NoteViewmodel @Inject constructor(
             Constants.HIGH,
             Constants.MEDIUM,
             Constants.LOW,
-            Constants.ALL,
         )
         prioritiesList.postValue(priorities)
     }

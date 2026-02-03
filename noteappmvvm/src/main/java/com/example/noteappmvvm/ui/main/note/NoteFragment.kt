@@ -6,7 +6,9 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.activity.viewModels
 import androidx.fragment.app.viewModels
+import com.example.local.Constants
 import com.example.noteappmvvm.data.model.NoteEntity
+import com.example.noteappmvvm.utils.getIndexFromList
 import com.example.noteappmvvm.utils.setupSpinnerListWithAdapter
 import com.example.noteappmvvm.viewmodel.NoteViewmodel
 import com.example.ui.databinding.FragmentNoteBinding
@@ -32,6 +34,12 @@ class NoteFragment : BottomSheetDialogFragment() {
     @Inject
     lateinit var noteEntity: NoteEntity
 
+    private var noteId = -1
+    private var type = ""
+
+    private var categories = mutableListOf<String>()
+    private var priorities = mutableListOf<String>()
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -44,6 +52,8 @@ class NoteFragment : BottomSheetDialogFragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
+
+        noteId = arguments?.getInt(Constants.BUNDLE_ID) ?: 0
         binding?.apply {
 
             //close
@@ -54,6 +64,7 @@ class NoteFragment : BottomSheetDialogFragment() {
             //Spinners
             viewModel.createCategoriesList()
             viewModel.categoriesList.observe(viewLifecycleOwner) { categoryList ->
+                categories.addAll(categoryList)
                 categoriesSpinner.setupSpinnerListWithAdapter(categoryList) {
                     category = it
                 }
@@ -62,19 +73,32 @@ class NoteFragment : BottomSheetDialogFragment() {
 
             viewModel.createPrioritiesList()
             viewModel.prioritiesList.observe(viewLifecycleOwner) { prioritiesList ->
+                priorities.addAll(prioritiesList)
                 prioritySpinner.setupSpinnerListWithAdapter(prioritiesList) {
                     priority = it
                 }
 
             }
 
+            //getExisting note
+            if (noteId != 0){
+                viewModel.getNote(noteId)
+                viewModel.note.observe(this@NoteFragment){
+                    it?.data.let { thisNote->
+                        titleEdt.setText(thisNote?.title)
+                        descEdt.setText(thisNote?.desc)
+                        categoriesSpinner.setSelection(categories.getIndexFromList(thisNote?.category!!))
+                        prioritySpinner.setSelection(priorities.getIndexFromList(thisNote.priority))
+                    }
+                }
+            }
 
             //save update note
             saveNoteBtn.setOnClickListener {
                 val title = titleEdt.text.toString()
                 val description = descEdt.text.toString()
 
-                noteEntity.id = 0
+                noteEntity.id = noteId
                 noteEntity.title = title
                 noteEntity.desc = description
                 noteEntity.category = category
@@ -82,7 +106,11 @@ class NoteFragment : BottomSheetDialogFragment() {
 
 
                 if (title.isNotEmpty() && description.isNotEmpty()) {
-                    viewModel.saveUpdateNote(noteEntity, true)
+                    if (noteId == 0){
+                        viewModel.saveUpdateNote(noteEntity, true)
+                    }else{
+                        viewModel.saveUpdateNote(noteEntity, false)
+                    }
                 }
                 this@NoteFragment.dismiss()
             }

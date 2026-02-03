@@ -30,3 +30,29 @@ fun Spinner.setupSpinnerListWithAdapter(
 
     }
 }
+
+fun MutableList<out Any>.getIndexFromList(item: String) : Int{
+    var index = 0
+    for (i in this.indices){
+        if (this[i] == item){
+            index = i
+            break
+        }
+    }
+    return index
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
