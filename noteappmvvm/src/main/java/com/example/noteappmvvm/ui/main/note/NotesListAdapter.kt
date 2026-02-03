@@ -1,0 +1,139 @@
+package com.example.noteappmvvm.ui.main.note
+
+import android.content.Context
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.appcompat.widget.PopupMenu
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.RecyclerView
+import com.example.local.Constants
+import com.example.noteappmvvm.data.model.NoteEntity
+import com.example.ui.R
+import com.example.ui.databinding.NoteItemBinding
+import javax.inject.Inject
+
+class NotesListAdapter @Inject constructor() : RecyclerView.Adapter<NotesListAdapter.MyViewHolder>()  {
+
+    private lateinit var binding: NoteItemBinding
+    private lateinit var context: Context
+    private var notesList = emptyList<NoteEntity>()
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MyViewHolder {
+        binding = NoteItemBinding.inflate(LayoutInflater.from(parent.context),parent,false)
+        context = parent.context
+        return MyViewHolder()
+    }
+
+    override fun getItemCount(): Int {
+        return notesList.size
+    }
+
+    override fun onBindViewHolder(holder: MyViewHolder, position: Int) {
+        holder.bind(notesList[position])
+        holder.setIsRecyclable(true)
+    }
+
+
+    inner class MyViewHolder() : RecyclerView.ViewHolder(binding.root){
+        fun bind(item:NoteEntity){
+            binding.apply {
+
+                /*root.setOnClickListener {
+                    onItemClickListener?.let {
+                        it(item)
+                    }
+                }*/
+
+                descTxt.text = item.desc
+                titleTxt.text = item.title
+                when(item.priority){
+                    Constants.HIGH->{
+                        priorityColor.setBackgroundColor(context.getColor(R.color.red))
+                    }
+                    Constants.MEDIUM->{
+                        priorityColor.setBackgroundColor(context.getColor(R.color.yellow))
+                    }
+                    Constants.LOW->{
+                        priorityColor.setBackgroundColor(context.getColor(R.color.aqua))
+                    }
+                }
+
+                when(item.category){
+                    Constants.HEALTH->{
+                        categoryImg.setImageResource(R.drawable.healthcare)
+                    }
+                    Constants.HOME->{
+                        categoryImg.setImageResource(R.drawable.home)
+                    }
+                    Constants.WORK->{
+                        categoryImg.setImageResource(R.drawable.work)
+                    }
+                    Constants.EDUCATION->{
+                        categoryImg.setImageResource(R.drawable.education)
+                    }
+
+                }
+
+
+                menuImg.setOnClickListener {
+                    val popUpMenu = PopupMenu(context,it)
+                    popUpMenu.inflate(R.menu.menu_item)
+                    popUpMenu.show()
+
+                    //click
+                    popUpMenu.setOnMenuItemClickListener {menuItem->
+
+                        when(menuItem.itemId){
+                            R.id.item_delete->{
+                                onItemClickListener?.let { it1 -> it1(item,Constants.DELETE) }
+                            }
+                            R.id.item_edit->{
+                                onItemClickListener?.let { it1 -> it1(item,Constants.EDIT) }
+                            }
+                        }
+
+                        return@setOnMenuItemClickListener true
+                    }
+                }
+
+            }
+        }
+    }
+
+
+    private var onItemClickListener : ((NoteEntity,String) ->  Unit)? = null
+
+    fun setOnClickListener(listener:((NoteEntity,String) ->  Unit)) {
+        onItemClickListener = listener
+    }
+
+    fun setData(data:List<NoteEntity>){
+        val notesDiffUtils = NotesDiffUtils(notesList,data)
+        val diffUtils = DiffUtil.calculateDiff(notesDiffUtils)
+        notesList = data
+        diffUtils.dispatchUpdatesTo(this)
+    }
+
+
+    class NotesDiffUtils(private val oldItem:List<NoteEntity>,private val newItem:List<NoteEntity>) : DiffUtil.Callback(){
+        override fun getOldListSize(): Int {
+            return oldItem.size
+        }
+
+        override fun getNewListSize(): Int {
+            return newItem.size
+        }
+
+        override fun areItemsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldItem[oldItemPosition] == newItem[newItemPosition]
+        }
+
+        override fun areContentsTheSame(oldItemPosition: Int, newItemPosition: Int): Boolean {
+            return oldItem[oldItemPosition] == newItem[newItemPosition]
+        }
+    }
+
+
+
+}

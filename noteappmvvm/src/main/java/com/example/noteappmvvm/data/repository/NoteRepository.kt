@@ -10,8 +10,6 @@ class NoteRepository @Inject constructor(
 
     suspend fun saveNote(note: NoteEntity) = dao.saveNote(note)
 
-    suspend fun deleteNote(note: NoteEntity) = dao.deleteNote(note)
-
     suspend fun updateNote(note: NoteEntity) = dao.updateNote(note)
 
 
