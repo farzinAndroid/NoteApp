@@ -2,8 +2,8 @@
 plugins {
     alias(libs.plugins.android.application) apply false
     alias(libs.plugins.kotlin.android) apply false
-    id("androidx.navigation.safeargs.kotlin") version "2.9.5" apply false
-    id ("com.google.dagger.hilt.android") version "2.57" apply false
+    id("androidx.navigation.safeargs.kotlin") version "2.8.5" apply false
+    id ("com.google.dagger.hilt.android") version "2.52" apply false
     alias(libs.plugins.devtools.ksp) apply false
     alias(libs.plugins.android.library) apply false
 }

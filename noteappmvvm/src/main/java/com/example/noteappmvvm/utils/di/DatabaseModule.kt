@@ -27,7 +27,7 @@ object DatabaseModule {
         klass = NoteDatabase::class.java
     )
         .allowMainThreadQueries()
-        .fallbackToDestructiveMigration(true)
+        .fallbackToDestructiveMigration()
         .build()
 
     @Provides
