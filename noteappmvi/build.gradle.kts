@@ -1,0 +1,56 @@
+plugins {
+    alias(libs.plugins.android.application)
+    alias(libs.plugins.kotlin.android)
+    id ("com.google.dagger.hilt.android")
+    alias(libs.plugins.devtools.ksp)
+    id("androidx.navigation.safeargs.kotlin")
+}
+
+android {
+    namespace = "com.example.noteappmvi"
+    compileSdk = 36
+
+    defaultConfig {
+        minSdk = 24
+
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
+    }
+
+    compileOptions {
+        sourceCompatibility = JavaVersion.VERSION_11
+        targetCompatibility = JavaVersion.VERSION_11
+    }
+    kotlinOptions {
+        jvmTarget = "11"
+    }
+}
+
+dependencies {
+    implementation(libs.androidx.core.ktx)
+    implementation(libs.androidx.appcompat)
+    implementation(libs.material)
+
+
+    implementation(project(":ui"))
+    implementation(project(":local"))
+
+
+    //hilt di
+    implementation (libs.hilt.android)
+    ksp (libs.hilt.compiler)
+
+
+    //Room
+    implementation (libs.androidx.room.runtime)
+    implementation (libs.androidx.room.ktx)
+    ksp (libs.androidx.room.compiler)
+    implementation(libs.androidx.room.rxjava3)
+
+    //Nav
+    implementation(libs.androidx.navigation.fragment.ktx.v295)
+    implementation(libs.androidx.navigation.ui.ktx.v295)
+
+    implementation("androidx.lifecycle:lifecycle-viewmodel-ktx:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-runtime-ktx:2.10.0")
+    implementation("androidx.lifecycle:lifecycle-livedata-ktx:2.10.0")
+}
